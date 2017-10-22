@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Minimal JavaScript Snake with readable code</title>
+    <link rel="stylesheet" href="css/snake.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div id="w" class="bgGreen">
+    <!--<img src="img/back.svg" id="uiBg" />-->
+    <div id="topbarLeft" class="colorDarkGreen">Snake Lord</div>
+    <div id="topbarRight" class="colorDarkGreen">0</div>
+    <div id="topbarLine" class="bgDarkGreen"></div>
+
+    <div id="canvasWrapper"></div>
+
+    <div id="keyWrapper">
+        <div id="keyUp"></div>
+        <div id="keyLeft"></div>
+        <div id="keyDown"></div>
+        <div id="keyRight"></div>
+    </div>
+
+</div>
+<div id="gameoverWindow" class="hidden">
+    <h2>GameOver</h2>
+    <p>Змейка укусила сама себя</p>
+    <button id="gameRestartButton">Начать заново</button>
+</div>
+<script src="js/renders/CanvasRenderer.js"></script>
+<script src="js/GameCompact.js"></script>
+<script src="js/UI.js"></script>
+<script>
+    UI.build("w", "canvasWrapper", 540, 960);
+    UI.bindGame(Game);
+    Game.start(32, 36); // инициализация мира и запуск игры
+</script>
+</body>
+</html>
