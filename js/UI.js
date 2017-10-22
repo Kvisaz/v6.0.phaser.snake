@@ -131,7 +131,7 @@ UI.onScoreChange = function (score) {
 
 // Обработка геймувера
 UI.onGameOver = function (score) {
-    console.log("Game Over");
+    console.log("GameLogic Over");
     this.gameoverWin.classList.remove("hidden"); // показываем окно геймувера, добавляя ему класс для скрытия
 };
 

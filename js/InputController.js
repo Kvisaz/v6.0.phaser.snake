@@ -38,12 +38,16 @@ InputController.update = function () {
     else if (this.keys.right.isDown) this.setDirection(Directions.RIGHT);
 
     console.log("InputController.update");
+    console.log("InputController.this.world.direction = "+this.world.direction);
 };
 
 // Обработчики нажатий клавиш, переданных от UI
 InputController.setDirection = function (keyDirection) {
+    console.log("InputController.setDirection");
+    console.log("InputController.keyDirection = "+keyDirection);
     // если это не противоположное направление - сохраняем его как новое
     if (Math.abs(keyDirection - this.world.direction) != 2) {
         this.world.direction = keyDirection;
+        console.log("InputController.this.world.direction = "+this.world.direction);
     }
 };

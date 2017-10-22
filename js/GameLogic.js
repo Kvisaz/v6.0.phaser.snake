@@ -12,6 +12,10 @@ var GameLogic = {
     ],
 };
 
+GameLogic.init = function (world) {
+    this.world = world;
+};
+
 // функция создания яблока
 GameLogic.createNewApple = function () {
     this.world.apple.x = Math.floor(Math.random() * this.world.width);
@@ -57,7 +61,7 @@ GameLogic.initLevel = function (width, height) {
 // жизненный цикл уровня, повторяется постоянно
 GameLogic.update = function () {
     // 1. двигаем змейку - ищем следующий ход
-    var move = Moves[this.world.direction];
+    var move = this.moves[this.world.direction];
     // todo log
     console.log("direction: " + this.world.direction);
     console.log("move: " + move.x + " / " + move.y);
