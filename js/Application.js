@@ -12,9 +12,8 @@ var Application = {
     phaserGame: null, // наша Phaser-игра, реальное воплощение игрушки
 };
 
-// Создаем вью, куда будем выводить видимое представление, и откуда получать ввод пользователя
+// Создаем Phaser-игру с состоянием SnakeState
 Application.start = function () {
-    // Создаем Phaser-игру с состоянием SnakeState
     this.phaserGame = new Phaser.Game(this.width, this.height, Phaser.CANVAS, this.canvasId, SnakeState);
 };
 

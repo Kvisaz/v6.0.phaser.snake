@@ -29,15 +29,13 @@ GameLogic.eatApple = function () {
 };
 
 GameLogic.resetWorld = function (width, height) {
-    this.world = {
-        score: 0,
-        width: width,
-        height: height,
-        direction: Directions.RIGHT, // активное направление для змейки
-        snake: [], // массив сегментов змейки, каждый сегмент - { x:, y:, direction: }, змейка отсчитывается с головы
-        apple: {x: 0, y: 0}, // яблоко
-        gameover: true
-    }
+    this.world.score = 0;
+    this.world.width = width;
+    this.world.height = height;
+    this.world.direction = Directions.RIGHT; // активное направление для змейки
+    this.world.snake = []; // массив сегментов змейки, каждый сегмент - { x:, y:, direction: }, змейка отсчитывается с головы
+    this.world.apple = {x: 0, y: 0}; // яблоко
+    this.world.gameover = false;
 };
 
 // инициализация уровня, можно создавать разные размеры

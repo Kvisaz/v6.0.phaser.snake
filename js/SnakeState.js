@@ -7,6 +7,7 @@ var SnakeState = {
         world: WorldState, // модель мира, пассивная как упавшая ель
         logic: GameLogic,  // логика мира, меняет только модель
         controller: InputController, // ввод, использует phaserGame и меняет модель мира
+        renderer: SnakeRenderer, // вывод графики Змейки
     },
 };
 
@@ -26,6 +27,10 @@ SnakeState.create = function () {
     this.snakeGame.controller.init(this.snakeGame.world, this.game); // this.game это как раз ссылка на будущий game в State
     this.snakeGame.logic.init(this.snakeGame.world); // подключаем мир к логике
     this.snakeGame.logic.start(30,30); // запускаем работу логики
+
+    // создаем графику для вывода змейки
+    var snakeScreenGraphics = this.game.add.graphics(14,72);
+    this.snakeGame.renderer.init(this.snakeGame.world, this.game, snakeScreenGraphics);
 };
 
 // Здесь исполняем логику
@@ -33,4 +38,5 @@ SnakeState.update = function () {
     console.log("SnakeState Updated");
     this.snakeGame.controller.update(); // отслеживаем управление, управление обновляет модель
     this.snakeGame.logic.update(); // логика смотрит на модель, и меняет ее по указанном последнему направлению
+    this.snakeGame.renderer.update(); // обновляем рендерер
 };
