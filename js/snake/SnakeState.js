@@ -8,7 +8,9 @@ var SnakeState = {
         logic: GameLogic,  // логика мира, меняет только модель
         controller: InputController, // ввод, использует phaserGame и меняет модель мира
         renderer: SnakeRenderer, // вывод графики Змейки
+        bitmapData: null, //  BitmapData для прямых манипуляция с Canvas
     },
+    frameCounter: 0 // подсчет скорости
 };
 
 // После передачи этого объекта в Phaser.Game у него появится куча свойств State из Phaser
@@ -16,27 +18,28 @@ var SnakeState = {
 
 // Здесь размещаем загрузку необходимых ассетов и инициализацию
 SnakeState.preload = function () {
-    console.log("SnakeState Preloaded!");
-
+    this.snakeGame.renderer.preload(this.game);
 };
 
 // Здесь создаем спрайты и другие объекты, которые требуют загруженных ассетов
 SnakeState.create = function () {
-    console.log("SnakeState created!");
+    this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     // подключаем нашу змейку к Phaser game.
     this.snakeGame.controller.init(this.snakeGame.world, this.game); // this.game это как раз ссылка на будущий game в State
     this.snakeGame.logic.init(this.snakeGame.world); // подключаем мир к логике
-    this.snakeGame.logic.start(30,30); // запускаем работу логики
-
-    // создаем графику для вывода змейки
-    var snakeScreenGraphics = this.game.add.graphics(14,72);
-    this.snakeGame.renderer.init(this.snakeGame.world, this.game, snakeScreenGraphics);
+    this.snakeGame.logic.start(30, 30); // запускаем работу логики
+    this.snakeGame.renderer.create(this.snakeGame.world, 14, 72);
 };
 
 // Здесь исполняем логику
 SnakeState.update = function () {
-    console.log("SnakeState Updated");
+
+    this.frameCounter++; // для подсчета скорости
+    if(this.frameCounter != GameConfig.SNAKE_MOVE_IN_FRAMES) return;
+    this.frameCounter = 0;
     this.snakeGame.controller.update(); // отслеживаем управление, управление обновляет модель
     this.snakeGame.logic.update(); // логика смотрит на модель, и меняет ее по указанном последнему направлению
     this.snakeGame.renderer.update(); // обновляем рендерер
+
+    if(this.snakeGame.world.gameover){}
 };

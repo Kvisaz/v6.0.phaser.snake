@@ -60,9 +60,6 @@ GameLogic.initLevel = function (width, height) {
 GameLogic.update = function () {
     // 1. двигаем змейку - ищем следующий ход
     var move = this.moves[this.world.direction];
-    // todo log
-    console.log("direction: " + this.world.direction);
-    console.log("move: " + move.x + " / " + move.y);
     var head = this.world.snake[0];
     var next = {x: head.x + move.x, y: head.y + move.y};
     // переходы через грани
@@ -70,16 +67,12 @@ GameLogic.update = function () {
     if (next.x >= this.world.width) next.x = 0;
     if (next.y < 0) next.y = this.world.height - 1;
     if (next.y >= this.world.height) next.y = 0;
-    // todo log
-    console.log("next: " + next.x + " / " + next.y);
 
     // 2. проверяем GameOver
     var i, segment;
     for (i = 0; i < this.world.snake.length; i++) {
         segment = this.world.snake[i];
         if (segment.x === next.x && segment.y === next.y) {
-            // todo log
-            console.log("segment =" + segment.x + "/" + segment.y);
             this.over();
             break; // прекращаем проверку
         }

@@ -7,9 +7,5 @@ body{
     background: mediumseagreen;
 }
 
-#canvas {
-    padding: 10px;
-    background: mediumseagreen;
-    width: 540px;
-    margin: 0 auto;
-}
+html, body, #canvas {height: 100%;}
+canvas {  margin: 0 auto;}

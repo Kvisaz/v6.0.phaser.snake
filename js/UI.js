@@ -70,10 +70,6 @@ UI.onResize = function (e) {
     me.view.style.width = width + "px";
     me.view.style.height = height + "px";
     me.scale = width / me.idealWidth;
-
-    console.log("me.view.style.width = " + me.view.style.width);
-    console.log("me.view.style.height = " + me.view.style.height);
-    console.log("me.scale = " + me.scale);
 };
 
 /*  Подключаем ввод с клавиш клавиатуры */
@@ -103,7 +99,7 @@ UI.bindInput = function (game) {
 *  Сервисные сокращенные функции
 * */
 UI.onVisualKeyDown = function (e) {
-    console.log("onVisualKeyDown");
+
     var keyIndex = this.visualKeyIds.indexOf(e.target.id); // номер клавиши в массиве кодов
     if (keyIndex === -1) return; // если нажатая клавиша - не стрелки,  не обрабатываем
 
@@ -114,7 +110,7 @@ UI.onVisualKeyDown = function (e) {
 };
 
 UI.onVisualKeyUp = function (e) {
-    console.log("onVisualKeyUp");
+
     var keyIndex = this.visualKeyIds.indexOf(e.target.id); // номер клавиши в массиве кодов
     if (keyIndex === -1) return; // если нажатая клавиша - не стрелки,  не обрабатываем
     e.target.classList.remove("keyPressed"); // отжимаем кнопку
@@ -126,12 +122,11 @@ UI.onVisualKeyUp = function (e) {
 
 UI.onScoreChange = function (score) {
     this.scoreView.innerHTML = score;
-    console.log("score: " + score);
+
 };
 
 // Обработка геймувера
 UI.onGameOver = function (score) {
-    console.log("GameLogic Over");
     this.gameoverWin.classList.remove("hidden"); // показываем окно геймувера, добавляя ему класс для скрытия
 };
 
