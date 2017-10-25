@@ -27,9 +27,7 @@ var SnakeRenderer = {
 // Поскольку за рендеринг у нас отвечает этот класс - он и отвечает, что надо подгружать
 SnakeRenderer.preload = function (game) {
     this.game = game;
-    for (var imageName in this.IMAGES) {
-        game.load.image(this.IMAGES[imageName], "img/" + this.IMAGES[imageName]);
-    }
+    Utils.loadImages(game, this.IMAGES);
 };
 
 
