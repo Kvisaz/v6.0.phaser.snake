@@ -13,4 +13,8 @@ var GameConfig = {
 var ViewConfig = { // Позиционирование элементов
     SNAKE_SCREEN_X: 29,
     SNAKE_SCREEN_Y: 58,
+    UI_BG_X: 0,
+    UI_BG_Y: 0,
+    JOYPAD_X: 195,
+    JOYPAD_Y: 545,
 };

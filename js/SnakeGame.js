@@ -26,7 +26,7 @@ SnakeGame.create = function (game) {
 };
 
 // Здесь исполняем логику
-SnakeGame.update = function () {
+SnakeGame.update = function (game) {
     this.controller.update(); // отслеживаем управление, управление обновляет модель
 
     // Логика обновляется в зависимости от скорости
@@ -37,7 +37,7 @@ SnakeGame.update = function () {
         this.frameCounter = 0;
     }
     this.renderer.update(); // обновляем рендерер
-    this.ui.update(); // обновляем UI
+    this.ui.update(game); // обновляем UI
 
     if(this.world.gameover){
        // todo implement

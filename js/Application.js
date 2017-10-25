@@ -23,7 +23,7 @@ function SingleState(AppGame) {
         this.AppGame.create(this.game); // подключаем нашу змейку к Phaser game.
     };
     this.update = function () {
-        this.AppGame.update();
+        this.AppGame.update(this.game);
     };
 }
 
