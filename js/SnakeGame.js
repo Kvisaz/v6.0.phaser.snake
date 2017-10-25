@@ -11,6 +11,7 @@ var SnakeGame = {
 };
 
 SnakeGame.preload = function (game) {
+    Utils.loadImageAtlases(game,"img","snake",2);
     this.renderer.preload(game);
     this.ui.preload(game); // UI накладывается поверх игры, поэтому после рендерера
 };

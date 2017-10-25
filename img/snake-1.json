@@ -1,0 +1,28 @@
+{"frames": [
+
+{
+	"filename": "joypad_right",
+	"frame": {"x":1,"y":1,"w":284,"h":284},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":284,"h":284},
+	"sourceSize": {"w":284,"h":284}
+},
+{
+	"filename": "joypad_up",
+	"frame": {"x":287,"y":1,"w":284,"h":284},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":284,"h":284},
+	"sourceSize": {"w":284,"h":284}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "snake-1.png",
+	"format": "RGBA8888",
+	"size": {"w":572,"h":286},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:4fb5663352048e0cc28baa2fa4057450:48c5f12e1ee6e18fb894f454785c101d:9d73c5535f2fa51744cfc359beba8df1$"
+}
+}

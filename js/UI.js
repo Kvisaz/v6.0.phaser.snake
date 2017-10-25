@@ -6,16 +6,14 @@ var UI = {
     bg: null,
     // данные для отображения картинок
     IMAGES: {
-        BG_GAME_SYSTEM: 'ui_bg_gamesystem.png',
+        BG_GAME_SYSTEM: {page: 'snake-0', name: 'ui_bg_gamesystem'},
     }
 };
 // game - это ссылка на Phaser движок
-UI.preload = function (game) {
-    Utils.loadImages(game, this.IMAGES);
-};
+UI.preload = function (game) {};
 
 UI.create = function (game) {
-    game.add.image(0, 0, this.IMAGES.BG_GAME_SYSTEM);
+    game.add.image(0, 0, this.IMAGES.BG_GAME_SYSTEM.page, this.IMAGES.BG_GAME_SYSTEM.name);
 };
 
 UI.update = function (game) {

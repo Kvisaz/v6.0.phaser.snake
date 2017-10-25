@@ -19,15 +19,14 @@ var SnakeRenderer = {
 
     // данные для отображения картинок
     IMAGES: {
-        SNAKE_BODY: 'snake-body.png',
-        APPLE: 'snake-apple.png',
+        SNAKE_BODY: {page: 'snake-0', name: 'snake-body'},
+        APPLE: {page: 'snake-0', name: 'snake-apple'},
     }
 };
 
 // Поскольку за рендеринг у нас отвечает этот класс - он и отвечает, что надо подгружать
 SnakeRenderer.preload = function (game) {
     this.game = game;
-    Utils.loadImages(game, this.IMAGES);
 };
 
 
@@ -48,7 +47,7 @@ SnakeRenderer.create = function (world, x, y) {
         if (this.apple !== null) this.apple.destroy();
         x = this.x + this.world.apple.x * GameConfig.TILE_SIZE;
         y = this.y + this.world.apple.y * GameConfig.TILE_SIZE;
-        this.apple = this.game.add.image(x, y, this.IMAGES.APPLE);
+        this.apple = this.game.add.image(x, y, this.IMAGES.APPLE.page, this.IMAGES.APPLE.name);
     }
 
     // очищаем змейку на всякий случай
@@ -65,7 +64,7 @@ SnakeRenderer.create = function (world, x, y) {
         next = world.snake[i];
         x = this.x + next.x * GameConfig.TILE_SIZE;
         y = this.y + next.y * GameConfig.TILE_SIZE;
-        image = this.game.add.image(x, y, this.IMAGES.SNAKE_BODY);
+        image = this.game.add.image(x, y, this.IMAGES.SNAKE_BODY.page,this.IMAGES.SNAKE_BODY.name);
         this.snake.push(image); // сохраняем в змейке начиная с головы
     }
 
@@ -84,7 +83,7 @@ SnakeRenderer.update = function () {
     var newSegments = this.world.snake.length - this.snake.length;
     if (newSegments > 0) { // в модели новые сегменты!
         do {
-            this.snake.push(this.game.add.image(x, y, this.IMAGES.SNAKE_BODY));
+            this.snake.push(this.game.add.image(x, y, this.IMAGES.SNAKE_BODY.page,this.IMAGES.SNAKE_BODY.name));
             newSegments--;
         } while (newSegments > 0);
     }
