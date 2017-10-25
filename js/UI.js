@@ -14,8 +14,9 @@ var UI = {
         JOYPAD_DOWN: {page: 'snake-0', name: 'joypad_down'},
         JOYPAD_LEFT: {page: 'snake-0', name: 'joypad_left'},
     },
-    joypad: null,
-    isPointerOnJoypad: false
+    joypad: null, // виртуальный джойстик
+    isPointerOnJoypad: false,
+    keys: null, // клавиши для десктопа
 };
 // game - это ссылка на Phaser движок
 UI.preload = function (game) {
@@ -36,6 +37,11 @@ UI.create = function (game) {
     this.joypad.events.onInputOver.add((function () {this.isPointerOnJoypad = true;}).bind(this));
     this.joypad.events.onInputOut.add((function () {this.isPointerOnJoypad = false;}).bind(this));
 
+    // и добавляем клавиши для десктопа
+    if(game.device.desktop){
+        this.keys = game.input.keyboard.createCursorKeys();
+    }
+
 };
 
 UI.onKeyDown = function (image, pointer) {
@@ -52,16 +58,16 @@ UI.onKeyDown = function (image, pointer) {
 
     // определяем участок и включаем соответствующий фрейм
     if (x <= x1 && y >= y1 && y <= y2){ // LEFT
-        joypad.frameName = images.JOYPAD_LEFT.name;
+        this.onKeyLeftPress();
     }
     else if (x >= x2 && y >= y1 && y <= y2){ // right
-        joypad.frameName = images.JOYPAD_RIGHT.name;
+        this.onKeyRightPress();
     }
     else if (x >= x1 && x <= x2 && y <= y1 ){ // up
-        joypad.frameName = images.JOYPAD_UP.name;
+        this.onKeyUpPress();
     }
     else if (x >= x1 && x <= x2 && y >= y2 ){ // down
-        joypad.frameName = images.JOYPAD_DOWN.name;
+        this.onKeyDownPress();
     }
 
     console.log("UI.onKeyDown");
@@ -97,20 +103,53 @@ UI.update = function (game) {
 
         // определяем участок и включаем соответствующий фрейм
         if (x <= x1 && y >= y1 && y <= y2){ // LEFT
-            joypad.frameName = images.JOYPAD_LEFT.name;
+            this.onKeyLeftPress();
         }
         else if (x >= x2 && y >= y1 && y <= y2){ // right
-            joypad.frameName = images.JOYPAD_RIGHT.name;
+            this.onKeyRightPress();
         }
         else if (x >= x1 && x <= x2 && y <= y1 ){ // up
-            joypad.frameName = images.JOYPAD_UP.name;
+            this.onKeyUpPress();
         }
         else if (x >= x1 && x <= x2 && y >= y2 ){ // down
-            joypad.frameName = images.JOYPAD_DOWN.name;
+            this.onKeyDownPress();
         }
         else {
             joypad.frameName = images.JOYPAD.name;
         }
+    }
+    // проверяем клавиши на десктопе
+    if(game.device.desktop) {
+        if(this.keys.up.isDown) this.onKeyUpPress();
+        else if (this.keys.down.isDown) this.onKeyDownPress();
+        else if (this.keys.left.isDown) this.onKeyLeftPress();
+        else if (this.keys.right.isDown) this.onKeyRightPress();
+    }
+};
 
+UI.onKeyLeftPress = function () {
+    this.joypad.frameName = this.IMAGES.JOYPAD_LEFT.name;
+    this.setDirection(Directions.LEFT)
+};
+
+UI.onKeyRightPress = function () {
+    this.joypad.frameName = this.IMAGES.JOYPAD_RIGHT.name;
+    this.setDirection(Directions.RIGHT)
+};
+
+UI.onKeyDownPress = function () {
+    this.joypad.frameName = this.IMAGES.JOYPAD_DOWN.name;
+    this.setDirection(Directions.DOWN)
+};
+
+UI.onKeyUpPress = function () {
+    this.joypad.frameName = this.IMAGES.JOYPAD_UP.name;
+    this.setDirection(Directions.UP)
+};
+
+UI.setDirection = function (keyDirection) {
+    // если это не противоположное направление - сохраняем его как новое
+    if (Math.abs(keyDirection - this.world.direction) != 2) {
+        this.world.direction = keyDirection;
     }
 };
