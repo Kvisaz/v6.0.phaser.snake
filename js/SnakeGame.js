@@ -26,14 +26,17 @@ SnakeGame.create = function (game) {
 
 // Здесь исполняем логику
 SnakeGame.update = function () {
-    this.frameCounter++; // для подсчета скорости
-    if(this.frameCounter != GameConfig.SNAKE_MOVE_IN_FRAMES) return;
-    this.frameCounter = 0;
-
-    this.ui.update();
     this.controller.update(); // отслеживаем управление, управление обновляет модель
-    this.logic.update(); // логика смотрит на модель, и меняет ее по указанном последнему направлению
+
+    // Логика обновляется в зависимости от скорости
+    this.frameCounter++; // для подсчета скорости
+    if(this.frameCounter == GameConfig.SNAKE_MOVE_IN_FRAMES)
+    {
+        this.logic.update();
+        this.frameCounter = 0;
+    }
     this.renderer.update(); // обновляем рендерер
+    this.ui.update(); // обновляем UI
 
     if(this.world.gameover){
        // todo implement
