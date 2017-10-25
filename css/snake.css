@@ -8,4 +8,12 @@ body{
 }
 
 html, body, #canvas {height: 100%;}
-canvas {  margin: 0 auto;}
+#canvas, canvas {  margin: 0 auto;}
+
+#preloader{
+    position: absolute;
+    top:0;
+    width: 100%;
+    height: 100%;
+    background: url("../img/preloader.gif") center center no-repeat;
+}

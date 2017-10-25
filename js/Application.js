@@ -19,6 +19,7 @@ function SingleState(AppGame) {
         this.AppGame.preload(this.game); // методу нашей игры передаем Phaser-движок
     };
     this.create = function () {
+        document.getElementById("preloader").style.display = "none"; // убираем наш CSS прелоадер
         this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL; // для масштабирования во весь экран
         this.AppGame.create(this.game); // подключаем нашу змейку к Phaser game.
     };
@@ -33,5 +34,4 @@ Application.start = function () {
     this.phaserGame = new Phaser.Game(this.width, this.height, Phaser.CANVAS, this.canvasId, new SingleState(this.appGame));
 };
 
-// run Application
 Application.start();

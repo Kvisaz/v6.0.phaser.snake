@@ -17,9 +17,11 @@ var UI = {
     joypad: null, // виртуальный джойстик
     isPointerOnJoypad: false,
     keys: null, // клавиши для десктопа
+    music: null, // музыка
 };
 // game - это ссылка на Phaser движок
 UI.preload = function (game) {
+    game.load.audio('battle', 'sounds/battle.mp3'); // see http://phaser.io/examples/v2/audio/loop
 };
 
 UI.create = function (game) {
@@ -42,6 +44,14 @@ UI.create = function (game) {
         this.keys = game.input.keyboard.createCursorKeys();
     }
 
+    // включаем музыку
+    this.music = game.add.audio('battle');
+    game.sound.setDecodedCallback([this.music], this.onSoundDecoded, this);
+
+};
+
+UI.onSoundDecoded = function () {
+    this.music.loopFull(0.6);
 };
 
 UI.onKeyDown = function (image, pointer) {
