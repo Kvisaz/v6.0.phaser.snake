@@ -19,12 +19,22 @@ function SingleState(AppGame) {
         this.AppGame.preload(this.game); // методу нашей игры передаем Phaser-движок
     };
     this.create = function () {
+		//this.game.forceSingleUpdate = true; // todo test		
+		this.game.time.advancedTiming  = true;
         document.getElementById("preloader").style.display = "none"; // убираем наш CSS прелоадер
         this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL; // для масштабирования во весь экран
         this.AppGame.create(this.game); // подключаем нашу змейку к Phaser game.
+		
+		// todo delete
+		this.tmpText = this.game.add.text(0, 0, "-1fps", {
+			font: "45px Arial",
+			fill: "#ff0044",
+			align: "center"
+		});
     };
     this.update = function () {
         this.AppGame.update(this.game);
+		this.tmpText.setText(this.game.time.fps + " fps");
     };
 }
 
